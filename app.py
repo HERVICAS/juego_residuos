@@ -27,30 +27,23 @@ if "partida" not in st.session_state:
 if "mostrar_resultados" not in st.session_state:
     st.session_state.mostrar_resultados = False
 
-
 # Pantalla inicial
 mostrar_inicio()
 
-
-# Si el juego ya comenzó
 if st.session_state.inicio:
-    # Cronómetro
-    # tiempo_restante = mostrar_cronometro()
-
-    # Tablero
     aciertos = mostrar_tablero()
 
-    # Reinicio manual
-    reiniciar_juego()
+    # Botones VERIFICAR y NUEVO JUEGO en la misma fila
+    col_ver, col_new = st.columns(2)
 
-    # Reinicio automático
-    # if tiempo_restante == 0:
-    #     st.warning("Fin del juego")
+    with col_ver:
+        if st.button(
+            "✔ VERIFICAR RESPUESTAS",
+            key=f"verificar_{st.session_state.partida}",
+            use_container_width=True,
+        ):
+            st.session_state.mostrar_resultados = True
+            st.rerun()
 
-    #     time.sleep(3)
-
-    #     st.session_state.residuos_juego = obtener_residuos(residuos)
-
-    #     st.session_state.tiempo_inicio = time.time()
-
-    # st.rerun()
+    with col_new:
+        reiniciar_juego()
