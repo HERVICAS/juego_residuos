@@ -72,7 +72,7 @@ residuos = [
     {
         "nombre": "Restos Alimentos",
         "imagen": "assets/imagenes/restos_alimentos.png",
-        "contenedor": "NEGRA",
+        "contenedor": "VERDE",
     },
     {
         "nombre": "Vaso Desechable",
