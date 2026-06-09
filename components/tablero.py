@@ -1,5 +1,7 @@
 import streamlit as st
 import base64
+from data.residuos import residuos
+from utils.seleccion_residuos import obtener_residuos
 
 
 def imagen_base64(ruta):
@@ -169,6 +171,9 @@ def mostrar_tablero():
         if st.button("🔄 NUEVO JUEGO", key="nuevo_juego_final"):
             st.session_state.partida += 1
             st.session_state.mostrar_resultados = False
+
+            # NUEVOS RESIDUOS ALEATORIOS
+            st.session_state.residuos_juego = obtener_residuos(residuos)
 
             # borrar respuestas anteriores
             for clave in list(st.session_state.keys()):
