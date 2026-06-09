@@ -20,11 +20,10 @@ def mostrar_tablero():
     }
     /* Blanco - 1er botón de cada grupo */
     div[data-testid="column"]:nth-child(1) [data-testid="stButton"] button {
-        background-color: #e8e8e8 !important;
-        color: #333 !important;
-        border: 2px solid #bbb !important;
-        font-size: 9px !important;
-    }
+    background-color: white !important;
+    border: 3px solid #999 !important;
+    height: 80px !important;
+    
     /* Negro - 2do botón */
     div[data-testid="column"]:nth-child(2) [data-testid="stButton"] button {
         background-color: #333 !important;
@@ -61,9 +60,6 @@ def mostrar_tablero():
     st.divider()
     st.subheader("Clasifica correctamente los siguientes residuos:")
 
-    if st.button("✔ VERIFICAR RESPUESTAS", key=f"verificar_{st.session_state.partida}"):
-        st.session_state.mostrar_resultados = True
-
     columnas = st.columns(2)
 
     aciertos = 0
@@ -80,9 +76,7 @@ def mostrar_tablero():
                 b1, b2, b3, b4 = st.columns(4)
 
                 with b1:
-                    if st.button(
-                        "◻", key=f"{key_base}_b", use_container_width=True
-                    ):
+                    if st.button("◻", key=f"{key_base}_b", use_container_width=True):
                         st.session_state[key_base] = "BLANCA"
 
                 with b2:
@@ -150,9 +144,37 @@ def mostrar_tablero():
                 """
                 <h2 style='text-align:center;color:orange'>
                 ⚠️ SIGUE INTENTÁNDOLO,
-                TEN PRESENTE SIEMPRE EL CÓDIGO
-                DE COLORES
+                TEN PRESENTE SIEMPRE EL CÓDIGO DE COLORES
                 </h2>
                 """,
                 unsafe_allow_html=True,
             )
+
+    # ==================================================
+    # BOTONES INFERIORES
+    # ==================================================
+
+    st.divider()
+
+    col_btn1, col_btn2, col_btn3 = st.columns([1, 1, 3])
+
+    with col_btn1:
+        if st.button(
+            "✔ VERIFICAR RESPUESTAS", key=f"verificar_{st.session_state.partida}"
+        ):
+            st.session_state.mostrar_resultados = True
+            st.rerun()
+
+    with col_btn2:
+        if st.button("🔄 NUEVO JUEGO", key="nuevo_juego_final"):
+            st.session_state.partida += 1
+            st.session_state.mostrar_resultados = False
+
+            # borrar respuestas anteriores
+            for clave in list(st.session_state.keys()):
+                if clave.startswith("respuesta_"):
+                    del st.session_state[clave]
+
+            st.rerun()
+
+    return aciertos
