@@ -1,6 +1,8 @@
 import streamlit as st
 # import time
 
+
+
 # from data.residuos import residuos
 # from utils.seleccion_residuos import obtener_residuos
 
@@ -34,6 +36,14 @@ mostrar_inicio()
 
 # Si el juego ya comenzó
 if st.session_state.inicio:
+    # Cronómetro
+    # tiempo_restante = mostrar_cronometro()
+
+    # Tablero
+    aciertos = mostrar_tablero()
+
+    # Reinicio manual
+    #reiniciar_juego()
     # Cronómetro
     # tiempo_restante = mostrar_cronometro()
 
