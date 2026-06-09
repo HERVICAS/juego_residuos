@@ -81,7 +81,7 @@ def mostrar_tablero():
 
                 with b1:
                     if st.button(
-                        "WHITE", key=f"{key_base}_b", use_container_width=True
+                        "◻", key=f"{key_base}_b", use_container_width=True
                     ):
                         st.session_state[key_base] = "BLANCA"
 
